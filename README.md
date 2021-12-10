@@ -51,7 +51,7 @@ export async function useLyric() {
         lyric.togglePlay()
     }
     function seek(time) {
-        // Rest start time
+        // Reset start time
         lyric.seek(time)
     }
 }
