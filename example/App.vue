@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import Lyric from '../script/'
+import Lyric from 'lyric-resolver'
 import { ref } from 'vue'
 
 const lyric = ref<any>(

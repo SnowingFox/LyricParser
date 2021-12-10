@@ -3,9 +3,16 @@
 ### Description
 A JavaScript plugin for parser Lyric
 
+
+## 📦 Install
+
+```bash
+npm install lyric-resolver
+```
+
 ### Features
 
-- ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()` 
+- ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()`
 - 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
 
 ## 🦄 Usage
@@ -17,7 +24,7 @@ import { getLyric } from '../api/lyric.js'
 export async function useLyric() {
     const lrc = await getLyric()
     const lyric = new Lyric(lrc, handleLyric)
-    
+
     /*
     * @params curLineNum [number] Current line of lyric
     * @params txt [string] Current line's txt
@@ -27,7 +34,7 @@ export async function useLyric() {
     function handleLyric({ curLineNum, txt }) {
         console.log(curLineNum, txt)
     }
-    
+
     function play() {
         // Start playing
         lyric.play()
@@ -45,10 +52,4 @@ export async function useLyric() {
         lyric.seek(time)
     }
 }
-```
-
-## 📦 Install
-
-```bash
-npm install lyric-resolver
 ```
