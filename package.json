@@ -1,12 +1,30 @@
 {
-  "name": "package.json",
-  "version": "0.0.0",
+  "name": "lyric-resolver",
+  "version": "0.0.1",
+  "description": "A plugin to parse lyric",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/SnowingFox/LyricParser"
+  },
+  "keywords": ["lyric", "LyricParser", "lyric-parser"],
+  "author": {
+    "name": "SnowingFox",
+    "email": "MSnowingFox@outlook.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "rollup-build": "tsc --module commonjs && rollup -c rollup.config.ts"
   },
+  "files": [
+    "dist"
+  ],
+
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es5.js",
+  "typings": "dist/types/index.d.ts",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -16,12 +34,22 @@
     "vue": "^3.2.23"
   },
   "devDependencies": {
+    "@types/lodash.camelcase": "^4.3.6",
+    "@types/node": "^16.11.12",
+    "@types/rollup-plugin-json": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "@vitejs/plugin-vue": "^1.10.2",
     "commitizen": "^4.2.4",
     "eslint": "^8.4.1",
+    "lodash.camelcase": "^4.3.0",
     "prettier": "^2.5.1",
+    "rollup": "^2.61.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.4.4",
     "vite": "^2.7.0",
     "vue-tsc": "^0.28.10"

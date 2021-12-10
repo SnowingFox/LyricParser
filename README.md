@@ -1,11 +1,54 @@
-# Vue 3 + Typescript + Vite
+# LyricParser
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### Description
+A JavaScript plugin for parser Lyric
 
-## Recommended IDE Setup
+### Features
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()` 
+- 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
 
-## Type Support For `.vue` Imports in TS
+## 🦄 Usage
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```js
+import Lyric from 'lyric-resolver'
+import { getLyric } from '../api/lyric.js'
+
+export async function useLyric() {
+    const lrc = await getLyric()
+    const lyric = new Lyric(lrc, handleLyric)
+    
+    /*
+    * @params curLineNum [number] Current line of lyric
+    * @params txt [string] Current line's txt
+    * 
+    * @return void
+    * */
+    function handleLyric({ curLineNum, txt }) {
+        console.log(curLineNum, txt)
+    }
+    
+    function play() {
+        // Start playing
+        lyric.play()
+    }
+    function stop() {
+        // Stop playing
+        lyric.stop()
+    }
+    function togglePlay() {
+        // Auto set play state
+        lyric.togglePlay()
+    }
+    function seek(time) {
+        // Rest start time
+        lyric.seek(time)
+    }
+}
+```
+
+## 📦 Install
+
+```bash
+npm install lyric-resolver
+```
