@@ -18,13 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import Lyric, {
-  ILyric,
-  Lines,
-  LyricConstructor,
-  PLAYING_STATE,
-  HandlerParams,
-} from 'lyric-resolver'
+import Lyric from '../script/index'
 
 import { ref } from 'vue'
 

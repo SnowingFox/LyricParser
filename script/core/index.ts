@@ -48,13 +48,13 @@ export default class Lyric implements ILyric {
 
   private _playReset(offset: number, targetLine: number): void {
     this.curLine = targetLine
-    let delay: number = this._calculateDelay()
-
+    clearTimeout(this.timer)
+    let delay: number = offset || this._calculateDelay()
     this.timer = setTimeout(() => {
       this._callHandler()
       this.curLine++
       if (this.curLine < this.lines.length) {
-        this._playReset(offset, this.curLine)
+        this._playReset(this._calculateDelay(), this.curLine)
       } else {
         stop()
         return
@@ -77,8 +77,6 @@ export default class Lyric implements ILyric {
       targetIndex = this.curLine
     }
 
-    startTime += this.toggleTime
-
     this.state = PLAYING_STATE.playing
     this._fixLinesTime()
     this._playReset(startTime, targetIndex)
@@ -88,13 +86,14 @@ export default class Lyric implements ILyric {
     this.stop()
     let targetIndex = 0
     offset += this.toggleTime
+
     this.lines.forEach((line, index) => {
       if (offset >= this._findLine(index - 1).lineTime && offset <= line.lineTime) {
         targetIndex = index
       }
     })
     offset = this._findLine(targetIndex).lineTime - offset
-    this.play(offset, targetIndex)
+    this._playReset(offset, targetIndex)
   }
 
   stop(): void {
@@ -110,10 +109,8 @@ export default class Lyric implements ILyric {
     if (this.state === PLAYING_STATE.playing) {
       this.stop()
     } else {
-      this.play(this.lines[this.curLine].lineTime)
+      this.play()
     }
-
-    this.state = !this.state
   }
 
   private _callHandler(): void {

@@ -19,7 +19,7 @@ npm install lyric-resolver
 https://www.snowingfox.io/lyricparser
 
 ## 🦄 Usage
-
+### JavaScript
 ```js
 import Lyric from 'lyric-resolver'
 import { getLyric } from '../api/lyric.js'
@@ -55,4 +55,3 @@ export async function useLyric() {
         lyric.seek(time)
     }
 }
-```
