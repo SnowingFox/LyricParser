@@ -18,7 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import Lyric from 'lyric-resolver'
+import Lyric, {
+  ILyric,
+  Lines,
+  LyricConstructor,
+  PLAYING_STATE,
+  HandlerParams,
+} from 'lyric-resolver'
 
 import { ref } from 'vue'
 
@@ -77,13 +83,14 @@ const lyric = ref<any>(
 [03:49.990]想念只让自己苦了自己
 [03:54.510]爱上你是我情非得已
 [03:58.970]爱上你是我情非得已
-`,
+`, //function ({ curLineNum, txt }) {}
     handleLyric
   )
 )
+
 const seekTime = ref<string>('0')
 
-function handleLyric(payload: any): void {
+function handleLyric(payload: HandlerParams): void {
   const { curLineNum, txt } = payload
   console.log(curLineNum, txt)
 }

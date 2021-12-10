@@ -13,3 +13,30 @@ export default defineConfig({
     },
   },
 })
+// {
+//   "compilerOptions": {
+//   "moduleResolution": "node",
+//     "target": "es5",
+//     "module":"es2015",
+//     "lib": ["es2015", "es2016", "es2017", "dom"],
+//     "strict": true,
+//     "sourceMap": true,
+//     "declaration": true,
+//     "allowSyntheticDefaultImports": true,
+//     "experimentalDecorators": true,
+//     "emitDecoratorMetadata": true,
+//     "declarationDir": "dist/types",
+//     "outDir": "dist/lib",
+//     "typeRoots": [
+//     "node_modules/@types"
+//   ]
+// },
+//   "include": [
+//   "example/**/*.ts",
+//   "example/**/*.d.ts",
+//   "example/**/*.tsx",
+//   "example/**/*.vue",
+//   "script/**/*.d.ts",
+//   "script/**/*.ts"
+// ]
+// }

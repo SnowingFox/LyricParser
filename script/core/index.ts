@@ -1,9 +1,9 @@
-import { HandlerParams, Lines, PLAYING_STATE } from '../types'
+import { HandlerParams, ILyric, Lines, PLAYING_STATE } from '../types/index'
 import { transformRegTime } from './utils'
 
 const lineTimeReg: RegExp = /\[(\d{2}):(\d{2}).(\d{2,3})]/g
 
-export default class Lyric {
+export default class Lyric implements ILyric {
   lines: Lines[]
   lrc: string
   state: any
