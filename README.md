@@ -16,8 +16,8 @@ npm install lyric-resolver
 - 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
 
 ## 🎁 Example
-- 💡 Example: https://www.snowingfox.io/lyricparser
-- 🌎 Online Project: https://www.snowingfox.io/music
+- 💡 [**Plugin Example**](https://www.snowingfox.io/lyricparser)
+- 🌎 [**Online Project**](https://www.snowingfox.io/music)
 ## 🦄 Usage
 
 ```ts
