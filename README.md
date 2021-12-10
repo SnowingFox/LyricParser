@@ -15,9 +15,9 @@ npm install lyric-resolver
 - ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()`
 - 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
 
-## 🌎 Example
-https://www.snowingfox.io/lyricparser
-
+## 🎁 Example
+💡 Example: https://www.snowingfox.io/lyricparser
+🌎 Online Project: https://www.snowingfox.io/music
 ## 🦄 Usage
 
 ```ts
