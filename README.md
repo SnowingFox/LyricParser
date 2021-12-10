@@ -20,11 +20,11 @@ https://www.snowingfox.io/lyricparser
 
 ## 🦄 Usage
 
-```js
-import Lyric from 'lyric-resolver'
+```ts
+import Lyric, { HandlerParams } from 'lyric-resolver'
 import { getLyric } from '../api/lyric.js'
 
-export async function useLyric() {
+export async function useLyric(): any {
     const lrc = await getLyric()
     const lyric = new Lyric(lrc, handleLyric)
 
@@ -34,23 +34,23 @@ export async function useLyric() {
     * 
     * @return void
     * */
-    function handleLyric({ curLineNum, txt }) {
-        console.log(curLineNum, txt)
+    function handleLyric(payload: HandlerParams): void {
+        const { curLineNum, txt } = payload
     }
 
-    function play() {
+    function play(): void {
         // Start playing
         lyric.play()
     }
-    function stop() {
+    function stop(): void {
         // Stop playing
         lyric.stop()
     }
-    function togglePlay() {
+    function togglePlay(): void {
         // Auto set play state
         lyric.togglePlay()
     }
-    function seek(time) {
+    function seek(time): void {
         // Reset start time
         lyric.seek(time)
     }
