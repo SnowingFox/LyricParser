@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import Lyric from 'lyric-resolver'
+
 import { ref } from 'vue'
 
 const lyric = ref<any>(
@@ -80,9 +81,10 @@ const lyric = ref<any>(
     handleLyric
   )
 )
-const seekTime = ref<string>()
+const seekTime = ref<string>('0')
 
-function handleLyric({ curLineNum, txt }): void {
+function handleLyric(payload: any): void {
+  const { curLineNum, txt } = payload
   console.log(curLineNum, txt)
 }
 

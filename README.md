@@ -1,6 +1,6 @@
 # LyricParser
 
-### Description
+## Description
 A JavaScript plugin for parser Lyric
 
 
@@ -10,10 +10,13 @@ A JavaScript plugin for parser Lyric
 npm install lyric-resolver
 ```
 
-### Features
+## 🔋 Features
 
 - ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()`
 - 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
+
+## 🌎 Example
+https://www.snowingfox.io/lyricparser
 
 ## 🦄 Usage
 
