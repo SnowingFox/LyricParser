@@ -33,7 +33,4 @@ export const enum PLAYING_STATE {
   stop = 0,
   playing = 1,
 }
-export type LyricConstructor = (
-  lrc: string,
-  handler: (params: HandlerParams) => void
-) => any
+export type LyricConstructor = (lrc: string, handler: (params: HandlerParams) => void) => any

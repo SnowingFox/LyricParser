@@ -1,16 +1,18 @@
-import { HandlerParams, ILyric, Lines, PLAYING_STATE } from '../types/index'
+import { HandlerParams, Lines, PLAYING_STATE } from '../types/index'
 import { transformRegTime } from './utils'
 
 const lineTimeReg: RegExp = /\[(\d{2}):(\d{2}).(\d{2,3})]/g
 
-export default class Lyric implements ILyric {
+export default class Lyric {
   lines: Lines[]
   lrc: string
   state: any
   curLine: number
-  toggleTime: number
-  private timer: any
-  readonly handler: any
+  startTime: number
+  stopTime: number
+  offset: number
+  timer: any
+  handler: any
 
   constructor(lrc: string, handler: (params: HandlerParams) => void) {
     this.lrc = lrc
@@ -18,7 +20,9 @@ export default class Lyric implements ILyric {
     this.state = PLAYING_STATE.stop
     this.curLine = 0
     this.timer = null
-    this.toggleTime = Date.now()
+    this.startTime = 0
+    this.stopTime = 0
+    this.offset = 0
     this.handler = handler
     this._init()
   }
@@ -46,63 +50,38 @@ export default class Lyric implements ILyric {
     })
   }
 
-  private _playReset(offset: number, targetLine: number): void {
-    this.curLine = targetLine
+  private _playReset(): void {
+    let { delay, targetIndex } = this._calculateDelay()
+    //Avoiding the whitespace lyric line, so it's not targetIndex - 1
+    this.curLine = targetIndex
     clearTimeout(this.timer)
-    let delay: number = offset || this._calculateDelay()
     this.timer = setTimeout(() => {
-      this._callHandler()
-      this.curLine++
-      if (this.curLine < this.lines.length) {
-        this._playReset(this._calculateDelay(), this.curLine)
-      } else {
-        stop()
-        return
+      this._callHandler(this.curLine++)
+      if (this.curLine < this.lines.length && this.state === PLAYING_STATE.playing) {
+        this._playReset()
       }
     }, delay)
   }
 
-  play(startTime?: number, targetIndex?: number): void {
-    if (this.state === PLAYING_STATE.playing) {
-      return
-    }
-    if (!this.lines.length) {
-      return
-    }
-    if (!startTime) {
-      startTime = 0
-    }
-
-    if (!targetIndex) {
-      targetIndex = this.curLine
-    }
-
+  play(): void {
     this.state = PLAYING_STATE.playing
-    this._fixLinesTime()
-    this._playReset(startTime, targetIndex)
+    this.startTime = Date.now()
+    if (this.curLine < this.lines.length) {
+      clearTimeout(this.timer)
+      this._playReset()
+    }
   }
 
   seek(offset: number): void {
-    this.stop()
-    let targetIndex = 0
-    offset += this.toggleTime
-
-    this.lines.forEach((line, index) => {
-      if (offset >= this._findLine(index - 1).lineTime && offset <= line.lineTime) {
-        targetIndex = index
-      }
-    })
-    offset = this._findLine(targetIndex).lineTime - offset
-    this._playReset(offset, targetIndex)
+    this.offset = offset
+    this.play()
   }
 
   stop(): void {
-    if (this.state === PLAYING_STATE.stop) {
-      return
-    }
-    clearTimeout(this.timer)
     this.state = PLAYING_STATE.stop
-    this._fixLinesTime()
+    this.stopTime = Date.now()
+    this.offset = this.offset + this.stopTime - this.startTime
+    clearTimeout(this.timer)
   }
 
   togglePlay(): void {
@@ -113,29 +92,57 @@ export default class Lyric implements ILyric {
     }
   }
 
-  private _callHandler(): void {
-    let curLine = this.curLine
-    if (curLine < 0) {
+  restore(): void {
+    this.lrc = ''
+    this.lines = [] as Lines[]
+    this.state = PLAYING_STATE.stop
+    this.curLine = 0
+    this.timer = null
+    this.startTime = 0
+    this.stopTime = 0
+    this.offset = 0
+    this.handler = null
+  }
+
+  private _calculateDelay(): any {
+    let delay: number = this._findLine(this.curLine).lineTime - this.offset
+    let targetIndex: number = this.curLine
+
+    let isFind: boolean = false
+    if (delay < 0) {
+      this.lines.forEach((line, index) => {
+        delay = this._findLine(index).lineTime - this.offset
+        if (delay >= 0 && !isFind) {
+          targetIndex = index
+          isFind = true
+          return
+        }
+      })
+    } else {
+      this.lines.forEach((line, index) => {
+        if (this.offset >= this._findLine(index - 1).lineTime && this.offset < line.lineTime) {
+          targetIndex = index
+          delay = this._findLine(targetIndex).lineTime - this.offset
+        }
+      })
+    }
+    return {
+      delay,
+      targetIndex,
+    }
+  }
+
+  private _callHandler(index: number): void {
+    if (index < 0) {
       return
     }
 
-    if (curLine >= this.lines.length) {
-      stop()
-      return
-    }
+    let curLine = index
 
     this.handler({
       curLineNum: curLine,
-      txt: this._findCur().txt.trim(),
+      txt: this._findCur()?.txt.trim() || '',
     })
-  }
-
-  private _calculateDelay(): number {
-    let delay = this._findCur().lineTime - this.toggleTime
-    if (this.curLine >= 1) {
-      delay = this._findCur().lineTime - this._findLine(this.curLine - 1).lineTime
-    }
-    return delay
   }
 
   private _findCur(): Lines {
@@ -151,15 +158,5 @@ export default class Lyric implements ILyric {
       return lines[lines.length - 1]
     }
     return lines[i]
-  }
-
-  private _fixLinesTime(): void {
-    let deltaTime = Date.now() - this.toggleTime
-
-    this.toggleTime = Date.now()
-
-    this.lines.forEach((line) => {
-      return (line.lineTime += deltaTime)
-    })
   }
 }

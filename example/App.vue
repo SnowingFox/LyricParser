@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import Lyric from '../script/index'
+import Lyric, { HandlerParams } from '../script/index'
 
 import { ref } from 'vue'
 
@@ -100,6 +100,12 @@ function togglePlay(): void {
 }
 function seek(): void {
   lyric.value.seek(parseInt(seekTime.value) * 1000)
+}
+function restore(): void {
+  // You can use this when get a new lyric to avoid some unexpected error
+  // 你可以在重新初始化歌词对象时使用如下操作去避免一些意想不到的错误
+  lyric.value.restore()
+  lyric.value = null
 }
 </script>
 <style>

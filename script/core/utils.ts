@@ -6,5 +6,5 @@ export function transformRegTime(time: any[]): number {
 
     return item
   })
-  return Date.now() + time[1] * 60 * 1000 + time[2] * 1000 + time[3]
+  return time[1] * 60 * 1000 + time[2] * 1000 + time[3]
 }

@@ -15,18 +15,21 @@ npm install lyric-resolver
 - ⚡ **Easy to use**: Just `play()` `togglePlay()` `stop()` `seek()`
 - 🦾 **Type Strong**: Written in [Typescript](https://www.typescriptlang.org/), with [TS Docs](https://github.com/microsoft/tsdoc)
 
-## 🌎 Example
-https://www.snowingfox.io/lyricparser
+## 🎄 Example
+- 💡 [**Plugin Example**](https://snowigfox.github.io/lyricparser)
+- 🌎 [**Online Project**](https://snowigfox.github.io/music)
+- ✨ [****Online Project On Github****](https://github.com/SnowingFox/music)
 
 ## 🦄 Usage
-### JavaScript
-```js
-import Lyric from 'lyric-resolver'
+
+```ts
+import Lyric, { HandlerParams } from 'lyric-resolver'
+
 import { getLyric } from '../api/lyric.js'
 
-export async function useLyric() {
+export async function useLyric(): any {
     const lrc = await getLyric()
-    const lyric = new Lyric(lrc, handleLyric)
+    const currentLyric = new Lyric(lrc, handleLyric)
 
     /*
     * @params curLineNum [number] Current line of lyric
@@ -34,24 +37,28 @@ export async function useLyric() {
     * 
     * @return void
     * */
-    function handleLyric({ curLineNum, txt }) {
-        console.log(curLineNum, txt)
+    function handleLyric(payload: HandlerParams): void {
+        const { curLineNum, txt } = payload
+        // You can also get curLineNum like this
+        // 你也可以向下面这样操作得到curLineNum
+        const curLine: number = currentLyric.curLine
     }
 
-    function play() {
+    function play(): void {
         // Start playing
-        lyric.play()
+      currentLyric.play()
     }
-    function stop() {
+    function stop(): void {
         // Stop playing
-        lyric.stop()
+      currentLyric.stop()
     }
-    function togglePlay() {
+    function togglePlay(): void {
         // Auto set play state
-        lyric.togglePlay()
+      currentLyric.togglePlay()
     }
-    function seek(time) {
+    function seek(time): void {
         // Reset start time
-        lyric.seek(time)
+      currentLyric.seek(time)
     }
 }
+```
