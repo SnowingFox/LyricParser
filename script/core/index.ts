@@ -1,5 +1,6 @@
 import { HandlerParams, Lines, PLAYING_STATE } from '../types/index'
 import { transformRegTime } from './utils'
+import ErrnoException = NodeJS.ErrnoException
 
 const lineTimeReg: RegExp = /\[(\d{2}):(\d{2}).(\d{2,3})]/g
 
@@ -38,10 +39,15 @@ export default class Lyric {
       if (!time) {
         return
       }
+      let txt: string = lrc.replace(lineTimeReg, '')
+
+      if (txt === '') {
+        return
+      }
 
       this.lines.push({
         lineTime: transformRegTime(time),
-        txt: lrc.replace(lineTimeReg, ''),
+        txt,
       })
     })
 
@@ -120,7 +126,10 @@ export default class Lyric {
       })
     } else {
       this.lines.forEach((line, index) => {
-        if (this.offset >= this._findLine(index - 1).lineTime && this.offset < line.lineTime) {
+        if (
+          this.offset >= this._findLine(index - 1).lineTime &&
+          this.offset < line.lineTime
+        ) {
           targetIndex = index
           delay = this._findLine(targetIndex).lineTime - this.offset
         }
@@ -138,11 +147,16 @@ export default class Lyric {
     }
 
     let curLine = index
-
-    this.handler({
-      curLineNum: curLine,
-      txt: this._findCur()?.txt.trim() || '',
-    })
+    if (this._findCur()?.txt === '') {
+    }
+    try {
+      this.handler({
+        curLineNum: curLine,
+        txt: this._findCur()?.txt.trim() || '',
+      })
+    } catch (e) {
+      return
+    }
   }
 
   private _findCur(): Lines {
