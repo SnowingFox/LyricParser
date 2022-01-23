@@ -60,9 +60,5 @@ export async function useLyric(): any {
         // Reset start time
       currentLyric.seek(time)
     }
-    function restore(): void {
-        // Restore
-        currentLyric.restore()
-    }
 }
 ```
