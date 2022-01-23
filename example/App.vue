@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import Lyric, { HandlerParams } from '../script/index'
+import Lyric, { HandlerParams } from 'lyric-resolver'
 
 import { ref } from 'vue'
 
