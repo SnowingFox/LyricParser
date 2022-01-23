@@ -22,6 +22,7 @@ npm install lyric-resolver
 
 ## 🦄 Usage
 
+
 ```ts
 import Lyric, { HandlerParams } from 'lyric-resolver'
 
