@@ -1,0 +1,44 @@
+import{d,r as c,L as f,c as B,a as o,w as m,v as y,F as C,b as v,o as i,n as g,t as E,e as _}from"./vendor.e845419d.js";const h=function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const u of document.querySelectorAll('link[rel="modulepreload"]'))l(u);new MutationObserver(u=>{for(const e of u)if(e.type==="childList")for(const s of e.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&l(s)}).observe(document,{childList:!0,subtree:!0});function F(u){const e={};return u.integrity&&(e.integrity=u.integrity),u.referrerpolicy&&(e.referrerPolicy=u.referrerpolicy),u.crossorigin==="use-credentials"?e.credentials="include":u.crossorigin==="anonymous"?e.credentials="omit":e.credentials="same-origin",e}function l(u){if(u.ep)return;u.ep=!0;const e=F(u);fetch(u.href,e)}};h();const k={class:"seek"},L={class:"seconds"},b=d({setup(A){const t=c(new f(`
+[00:00.000] \u4F5C\u8BCD : \u91CE\u7530\u6D0B\u6B21\u90CE
+[00:01.000] \u4F5C\u66F2 : \u91CE\u7530\u6D0B\u6B21\u90CE
+[00:19.600]
+[00:20.000]\u3084\u3063\u3068\u773C\u3092\u899A\u307E\u3057\u305F\u304B\u3044 \u305D\u308C\u306A\u306E\u306B\u306A\u305C\u773C\u3082\u5408\u308F\u305B\u3084\u3057\u306A\u3044\u3093\u3060\u3044\uFF1F
+[00:30.090]\u300C\u9045\u3044\u3088\u300D\u3068\u6012\u308B\u541B \u3053\u308C\u3067\u3082\u3084\u308C\u308B\u3060\u3051\u98DB\u3070\u3057\u3066\u304D\u305F\u3093\u3060\u3088
+[00:38.720]
+[00:39.670]\u5FC3\u304C\u8EAB\u4F53\u3092\u8FFD\u3044\u8D8A\u3057\u3066\u304D\u305F\u3093\u3060\u3088
+[00:44.340]
+[00:45.340]\u541B\u306E\u9AEA\u3084\u77B3\u3060\u3051\u3067\u80F8\u304C\u75DB\u3044\u3088
+[00:50.560]\u540C\u3058\u6642\u3092\u5438\u3044\u3053\u3093\u3067\u96E2\u3057\u305F\u304F\u306A\u3044\u3088
+[00:55.200]\u9065\u304B\u6614\u304B\u3089\u77E5\u308B \u305D\u306E\u58F0\u306B
+[01:00.260]\u751F\u307E\u308C\u3066\u306F\u3058\u3081\u3066 \u4F55\u3092\u8A00\u3048\u3070\u3044\u3044\uFF1F
+[01:07.240]
+[01:07.640]\u541B\u306E\u524D\u524D\u524D\u4E16\u304B\u3089\u50D5\u306F \u541B\u3092\u63A2\u3057\u306F\u3058\u3081\u305F\u3088
+[01:12.280]\u305D\u306E\u3076\u304D\u3063\u3061\u3087\u306A\u7B11\u3044\u65B9\u3092\u3081\u304C\u3051\u3066 \u3084\u3063\u3066\u304D\u305F\u3093\u3060\u3088
+[01:17.260]
+[01:17.630]\u541B\u304C\u5168\u7136\u5168\u90E8\u306A\u304F\u306A\u3063\u3066 \u30C1\u30EA\u30C2\u30EA\u306B\u306A\u3063\u305F\u3063\u3066
+[01:22.430]\u3082\u3046\u8FF7\u308F\u306A\u3044 \u307E\u305F\uFF11\u304B\u3089\u63A2\u3057\u306F\u3058\u3081\u308B\u3055
+[01:27.240]\u3080\u3057\u308D\uFF10\u304B\u3089 \u307E\u305F\u5B87\u5B99\u3092\u306F\u3058\u3081\u3066\u307F\u3088\u3046\u304B
+[01:32.670]
+[01:43.440]\u3069\u3063\u304B\u3089\u8A71\u3059\u304B\u306A \u541B\u304C\u7720\u3063\u3066\u3044\u305F\u9593\u306E\u30B9\u30C8\u30FC\u30EA\u30FC
+[01:53.480]\u4F55\u5104 \u4F55\u5149\u5E74\u5206\u306E\u7269\u8A9E\u3092\u8A9E\u308A\u306B\u304D\u305F\u3093\u3060\u3088 \u3051\u3069\u3044\u3056\u305D\u306E\u59FF\u3053\u306E\u773C\u306B\u6620\u3059\u3068
+[02:07.720]
+[02:08.720]\u541B\u3082\u77E5\u3089\u306C\u541B\u3068\u30B8\u30E3\u30EC\u3066 \u622F\u308C\u305F\u3044\u3088
+[02:13.530]\u541B\u306E\u6D88\u3048\u306C\u75DB\u307F\u307E\u3067\u611B\u3057\u3066\u307F\u305F\u3044\u3088
+[02:18.480]\u9280\u6CB3\u4F55\u500B\u5206\u304B\u306E \u679C\u3066\u306B\u51FA\u9022\u3048\u305F
+[02:23.530]\u305D\u306E\u624B\u3092\u58CA\u3055\u305A\u306B \u3069\u3046\u63E1\u3063\u305F\u306A\u3089\u3044\u3044\uFF1F
+[02:30.500]
+[02:31.000]\u541B\u306E\u524D\u524D\u524D\u4E16\u304B\u3089\u50D5\u306F \u541B\u3092\u63A2\u3057\u306F\u3058\u3081\u305F\u3088
+[02:35.680]\u305D\u306E\u9A12\u304C\u3057\u3044\u58F0\u3068\u6D99\u3092\u3081\u304C\u3051 \u3084\u3063\u3066\u304D\u305F\u3093\u3060\u3088
+[02:40.550]
+[02:40.990]\u305D\u3093\u306A\u9769\u547D\u524D\u591C\u306E\u50D5\u3089\u3092\u8AB0\u304C\u6B62\u3081\u308B\u3068\u3044\u3046\u3093\u3060\u308D\u3046
+[02:45.720]\u3082\u3046\u8FF7\u308F\u306A\u3044 \u541B\u306E\u30CF\u30FC\u30C8\u306B\u65D7\u3092\u7ACB\u3066\u308B\u3088
+[02:50.740]\u541B\u306F\u50D5\u304B\u3089\u8AE6\u3081\u65B9\u3092 \u596A\u3044\u53D6\u3063\u305F\u306E
+[02:55.880]
+[03:53.030]\u524D\u524D\u524D\u4E16\u304B\u3089\u50D5\u306F \u541B\u3092\u63A2\u3057\u306F\u3058\u3081\u305F\u3088
+[03:57.290]\u305D\u306E\u3076\u304D\u3063\u3061\u3087\u306A\u7B11\u3044\u65B9\u3092\u3081\u304C\u3051\u3066 \u3084\u3063\u3066\u304D\u305F\u3093\u3060\u3088
+[04:01.990]
+[04:02.620]\u541B\u304C\u5168\u7136\u5168\u90E8\u306A\u304F\u306A\u3063\u3066 \u30C1\u30EA\u30C2\u30EA\u306B\u306A\u3063\u305F\u3063\u3066
+[04:07.240]\u3082\u3046\u8FF7\u308F\u306A\u3044 \u307E\u305F\uFF11\u304B\u3089\u63A2\u3057\u306F\u3058\u3081\u308B\u3055
+[04:12.370]\u4F55\u5149\u5E74\u3067\u3082 \u3053\u306E\u6B4C\u3092\u53E3\u305A\u3055\u307F\u306A\u304C\u3089
+[04:18.090]
+`,l)),F=c("0");function l(a){const{curLineNum:r,txt:n}=a;console.log(r,n)}function u(){t.value.play()}function e(){t.value.stop()}function s(){t.value.togglePlay()}function D(){console.log(t.value),t.value.seek(parseInt(F.value)*1e3)}return(a,r)=>(i(),B(C,null,[o("button",{onClick:s},"toggle-play"),o("button",{onClick:u},"play"),o("button",{onClick:e},"stop"),o("div",k,[m(o("input",{type:"text",placeholder:"Please input the seconds","onUpdate:modelValue":r[0]||(r[0]=n=>F.value=n)},null,512),[[y,F.value]]),o("button",{onClick:D},"seek")]),(i(!0),B(C,null,v(t.value.lines,(n,p)=>(i(),B("div",{class:g(["lyric",{active:t.value.curLine-1===p}])},[o("p",L,E(n.lineTime/1e3)+"s -- "+E(n.txt),1)],2))),256))],64))}});_(b).mount("#app");
