@@ -1,10 +1,9 @@
-export function transformRegTime(time: any[]): number {
-  time = time.map((item, index) => {
+export function transformRegTime(times: RegExpExecArray): number {
+  const result: number[] = []
+  times.forEach((time, index) => {
     if (index >= 1 && index <= 3) {
-      return parseInt(item)
+      result.push(parseInt(time))
     }
-
-    return item
   })
-  return time[1] * 60 * 1000 + time[2] * 1000 + time[3]
+  return (result[0] * 60 + result[1]) * 1000 + result[2]
 }

@@ -1,8 +1,7 @@
 import { HandlerParams, Lines, PLAYING_STATE } from '../types/index'
 import { transformRegTime } from './utils'
-import ErrnoException = NodeJS.ErrnoException
 
-const lineTimeReg: RegExp = /\[(\d{2}):(\d{2}).(\d{2,3})]/g
+const lyricTimeReg: RegExp = /\[(\d{2}):(\d{2}).(\d{2,3})]/g
 
 export default class Lyric {
   lines: Lines[]
@@ -27,20 +26,21 @@ export default class Lyric {
     this.handler = handler
     this._init()
   }
-
   private _init(): void {
     this._initLines()
   }
 
   private _initLines(): void {
     this.lrc.split('\n').forEach((lrc) => {
-      let time = lineTimeReg.exec(lrc)
+      let time = lyricTimeReg.exec(lrc)
 
+      // 后面传time就不用非空断言了
       if (!time) {
         return
       }
-      let txt: string = lrc.replace(lineTimeReg, '')
+      let txt: string = lrc.replace(lyricTimeReg, '')
 
+      // 过滤空白文本
       if (txt === '') {
         return
       }
@@ -51,17 +51,18 @@ export default class Lyric {
       })
     })
 
+    // 升序，确保歌词是由它的时间来决定当前的位置
     this.lines.sort((a, b) => {
       return a.lineTime - b.lineTime
     })
   }
-
   private _playReset(): void {
+    // 计算距离下一行歌词还有多少时间
     let { delay, targetIndex } = this._calculateDelay()
-    //Avoiding the whitespace lyric line, so it's not targetIndex - 1
     this.curLine = targetIndex
     clearTimeout(this.timer)
     this.timer = setTimeout(() => {
+      // handler的实现，也就是用户自己定义的对歌词信息获取的函数
       this._callHandler(this.curLine++)
       if (this.curLine < this.lines.length && this.state === PLAYING_STATE.playing) {
         this._playReset()
@@ -76,11 +77,6 @@ export default class Lyric {
       clearTimeout(this.timer)
       this._playReset()
     }
-  }
-
-  seek(offset: number): void {
-    this.offset = offset
-    this.play()
   }
 
   stop(): void {
@@ -98,16 +94,9 @@ export default class Lyric {
     }
   }
 
-  restore(): void {
-    this.lrc = ''
-    this.lines = [] as Lines[]
-    this.state = PLAYING_STATE.stop
-    this.curLine = 0
-    this.timer = null
-    this.startTime = 0
-    this.stopTime = 0
-    this.offset = 0
-    this.handler = null
+  seek(offset: number): void {
+    this.offset = offset
+    this.play()
   }
 
   private _calculateDelay(): any {
@@ -141,6 +130,12 @@ export default class Lyric {
     }
   }
 
+  /**
+   function handleLyric(payload: HandlerParams): void {
+      const { curLineNum, txt } = payload
+      const curLine: number = currentLyric.curLine
+   }
+   */
   private _callHandler(index: number): void {
     if (index < 0) {
       return
@@ -148,6 +143,7 @@ export default class Lyric {
 
     let curLine = index
     if (this._findCur()?.txt === '') {
+      return
     }
     try {
       this.handler({
@@ -159,10 +155,12 @@ export default class Lyric {
     }
   }
 
+  // 找到当前歌词的信息
   private _findCur(): Lines {
     return this.lines[this.curLine]
   }
 
+  // 找到指定行数的歌词信息，类型为Lines
   private _findLine(i: number): Lines {
     const lines = this.lines
     if (i < 0) {
